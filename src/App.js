@@ -7,7 +7,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: {
+      accordions: {
         1: {open: false},
         2: {open: false},
         3: {open: false, special: true},
@@ -18,15 +18,15 @@ export default class App extends React.Component {
 
   handleClick = (id, isOpen) => {
     this.setState({
-      items: {
-        ...this.state.items,
-        [id]: { ...this.state.items[id], open: !isOpen }
+      accordions: {
+        ...this.state.accordions,
+        [id]: { ...this.state.accordions[id], open: !isOpen }
       }
     })
   };
 
   handleAndCloseAll = (id, isOpen) => {
-    const accordions = Object.assign({}, this.state.items);
+    const accordions = Object.assign({}, this.state.accordions);
     if (!isOpen) {
       Object.keys(accordions).forEach(key => {
         if (key !== id) {
@@ -43,7 +43,7 @@ export default class App extends React.Component {
         <div className="App">
           <p>The third option is special and will close all the others</p>
           <ul>
-            {Object.entries(this.state.items).map(([key, value]) => (
+            {Object.entries(this.state.accordions).map(([key, value]) => (
                 <li key={key}>
                   <Accordion id={key} open={value.open} onClick={value.special ? this.handleAndCloseAll : this.handleClick}/>
                 </li>
